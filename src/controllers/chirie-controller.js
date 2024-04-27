@@ -1,4 +1,5 @@
 const service = require("../services/chirie-service").ChirieService;
+const validator = require("../validators/validate-chirie").mapAndValidateChirie;
 
 class ChirieController {
   constructor() {
@@ -25,7 +26,11 @@ class ChirieController {
 
   async createChirie(req, res) {
     try {
-      const chirie = await this.chirieService.createChirie(req.body);
+      const chirieReq = validator(req.body);
+      if (!chirieReq) {
+        return res.status(400).send();
+      }
+      const chirie = await this.chirieService.createChirie(chirieReq);
       res.send(chirie);
     } catch (error) {
       res.status(500).send({ message: error.message });

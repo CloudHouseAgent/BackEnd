@@ -6,6 +6,17 @@ class Adress {
     this.county = county;
     this.country = country;
   }
+
+  static isValid(adress) {
+    return (
+      adress &&
+      typeof adress.location === "string" &&
+      typeof adress.floor === "number" &&
+      typeof adress.city === "string" &&
+      typeof adress.county === "string" &&
+      typeof adress.country === "string"
+    );
+  }
 }
 
 class PropertyInfo {
@@ -29,6 +40,21 @@ class PropertyInfo {
     this.warranty = warranty;
     this.type = type;
     this.comfort = comfort;
+  }
+
+  static isValid(propertyInfo) {
+    return (
+      propertyInfo &&
+      typeof propertyInfo.rooms === "number" &&
+      typeof propertyInfo.surface === "number" &&
+      typeof propertyInfo.year === "number" &&
+      typeof propertyInfo.state === "string" &&
+      typeof propertyInfo.furnished === "boolean" &&
+      typeof propertyInfo.price === "number" &&
+      typeof propertyInfo.warranty === "boolean" &&
+      typeof propertyInfo.type === "string" &&
+      typeof propertyInfo.comfort === "string"
+    );
   }
 }
 
@@ -62,6 +88,25 @@ class Facilities {
     this.smokeDetector = smokeDetector;
     this.gasDetector = gasDetector;
   }
+
+  static isValid(facilities) {
+    return (
+      facilities &&
+      typeof facilities.internet === "boolean" &&
+      typeof facilities.cableTv === "boolean" &&
+      typeof facilities.airConditioning === "boolean" &&
+      typeof facilities.centralHeating === "boolean" &&
+      typeof facilities.fridge === "boolean" &&
+      typeof facilities.stove === "boolean" &&
+      typeof facilities.washingMachine === "boolean" &&
+      typeof facilities.lift === "boolean" &&
+      typeof facilities.parking === "boolean" &&
+      typeof facilities.storageSpace === "boolean" &&
+      typeof facilities.balcony === "boolean" &&
+      typeof facilities.smokeDetector === "boolean" &&
+      typeof facilities.gasDetector === "boolean"
+    );
+  }
 }
 
 class OtherInfo {
@@ -70,6 +115,15 @@ class OtherInfo {
     this.freeFrom = freeFrom;
     this.petsAllowed = petsAllowed;
   }
+
+  static isValid(otherInfo) {
+    return (
+      otherInfo &&
+      typeof otherInfo.description === "string" &&
+      typeof otherInfo.freeFrom === "string" &&
+      typeof otherInfo.petsAllowed === "boolean"
+    );
+  }
 }
 
 class Contact {
@@ -77,6 +131,15 @@ class Contact {
     this.name = name;
     this.phone = phone;
     this.email = email;
+  }
+
+  static isValid(contact) {
+    return (
+      contact &&
+      typeof contact.name === "string" &&
+      typeof contact.phone === "string" &&
+      typeof contact.email === "string"
+    );
   }
 }
 
@@ -97,6 +160,18 @@ class Chirie {
     this.otherInfo = otherInfo;
     this.contact = contact;
     this.images = images;
+  }
+
+  static isValid(chirie) {
+    return (
+      chirie &&
+      Adress.isValid(chirie.adress) &&
+      PropertyInfo.isValid(chirie.propertyInfo) &&
+      Facilities.isValid(chirie.facilities) &&
+      OtherInfo.isValid(chirie.otherInfo) &&
+      Contact.isValid(chirie.contact) &&
+      Array.isArray(chirie.images)
+    );
   }
 }
 
