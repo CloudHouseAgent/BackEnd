@@ -1,0 +1,46 @@
+{
+  "adress": {
+    "location": "Strada Exemplu 123",
+    "floor": 2,
+    "city": "București",
+    "county": "București",
+    "country": "România"
+  },
+  "propertyInfo": {
+    "rooms": 3,
+    "surface": 70,
+    "year": 2010,
+    "state": "Bună",
+    "furnished": true,
+    "price": 1000,
+    "warranty": false,
+    "type": "Apartament",
+    "comfort": "Bun"
+  },
+  "facilities": {
+    "internet": true,
+    "cableTv": true,
+    "airConditioning": true,
+    "centralHeating": true,
+    "fridge": true,
+    "stove": true,
+    "washingMachine": true,
+    "lift": true,
+    "parking": true,
+    "storageSpace": true,
+    "balcony": true,
+    "smokeDetector": true,
+    "gasDetector": true
+  },
+  "otherInfo": {
+    "description": "Apartament spațios cu vedere la parc",
+    "freeFrom": "Disponibil imediat",
+    "petsAllowed": true
+  },
+  "contact": {
+    "name": "John Doe",
+    "phone": "0722 123 456",
+    "email": "john.doe@example.com"
+  },
+  "images": []
+}
