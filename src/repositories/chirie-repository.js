@@ -19,6 +19,18 @@ class ChirieRepository {
     return resource;
   }
 
+  async getMyChirii(userId) {
+    const querySpec = {
+      query: "SELECT * FROM c WHERE c.contact.userId = @userId",
+      parameters: [{ name: "@userId", value: userId }],
+    };
+
+    const { resources } = await this.container.items
+      .query(querySpec)
+      .fetchAll();
+    return resources;
+  }
+
   async createChirie(chirie) {
     const { resource } = await this.container.items.create(chirie);
     return resource;
