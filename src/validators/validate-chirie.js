@@ -85,6 +85,4 @@ function mapAndValidateChirie(body) {
   );
 }
 
-module.exports = {
-  mapAndValidateChirie,
-};
+export default mapAndValidateChirie;

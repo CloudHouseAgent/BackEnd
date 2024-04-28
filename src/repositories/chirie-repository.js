@@ -1,6 +1,6 @@
-require("dotenv").config();
-const { Chirie } = require("../models").Chirie;
-const client = require("../db").client;
+import { Chirie } from "../models.js";
+import client from "../db.js";
+import "dotenv/config";
 
 class ChirieRepository {
   constructor() {
@@ -35,4 +35,4 @@ class ChirieRepository {
   }
 }
 
-module.exports = { ChirieRepository };
+export default ChirieRepository;

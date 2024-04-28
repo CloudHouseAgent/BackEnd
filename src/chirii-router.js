@@ -1,8 +1,7 @@
-const express = require("express");
+import express from "express";
+import ChirieController from "./controllers/chirie-controller.js";
 const router = express.Router();
-const chiriiController =
-  require("./controllers/chirie-controller").ChirieController;
-const controller = new chiriiController();
+const controller = new ChirieController();
 
 router.get("/", (req, res) => {
   controller.getChirii(req, res);
@@ -20,4 +19,4 @@ router.post("/", (req, res) => {
   controller.createChirie(req, res);
 });
 
-module.exports = { ChiriiRouter: router };
+export default router;

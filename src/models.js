@@ -175,11 +175,4 @@ class Chirie {
   }
 }
 
-module.exports = {
-  Adress,
-  PropertyInfo,
-  Facilities,
-  OtherInfo,
-  Contact,
-  Chirie,
-};
+export { Chirie, Adress, PropertyInfo, Facilities, OtherInfo, Contact };

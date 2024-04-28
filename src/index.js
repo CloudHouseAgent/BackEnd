@@ -1,17 +1,17 @@
-require("dotenv").config();
-
-const cors = require("cors");
-const url = require("url");
-const bodyParser = require("body-parser");
-const { ChiriiRouter } = require("./chirii-router");
-
-const express = require("express");
+import "dotenv/config";
+import cors from "cors";
+import bodyParser from "body-parser";
+import ChiriiRouter from "./chirii-router.js";
+import express from "express";
+import verify from "./services/token-service.js";
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(verify);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

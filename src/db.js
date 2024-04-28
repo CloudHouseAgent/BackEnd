@@ -1,4 +1,4 @@
-const CosmosClient = require("@azure/cosmos").CosmosClient;
+import { CosmosClient } from "@azure/cosmos";
 
 const endpoint = process.env.DB_ENDPOINT;
 const key = process.env.DB_KEY;
@@ -62,4 +62,4 @@ createDatabase()
     process.exit(1);
   });
 
-module.exports = { client };
+export default client;

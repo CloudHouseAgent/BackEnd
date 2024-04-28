@@ -1,6 +1,5 @@
-const repository =
-  require("../repositories/chirie-repository").ChirieRepository;
-const uuid = require("uuid");
+import repository from "../repositories/chirie-repository.js";
+import { v4 as uuid } from "uuid";
 
 class ChirieService {
   constructor() {
@@ -30,4 +29,4 @@ class ChirieService {
   }
 }
 
-module.exports = { ChirieService };
+export default ChirieService;

@@ -1,5 +1,5 @@
-const service = require("../services/chirie-service").ChirieService;
-const validator = require("../validators/validate-chirie").mapAndValidateChirie;
+import service from "../services/chirie-service.js";
+import validator from "../validators/validate-chirie.js";
 
 class ChirieController {
   constructor() {
@@ -59,4 +59,4 @@ class ChirieController {
   }
 }
 
-module.exports = { ChirieController };
+export default ChirieController;
