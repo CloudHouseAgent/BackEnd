@@ -36,6 +36,5 @@
     "description": "Apartament spațios cu vedere la parc",
     "freeFrom": "Disponibil imediat",
     "petsAllowed": true
-  },
-  "images": []
+  }
 }
