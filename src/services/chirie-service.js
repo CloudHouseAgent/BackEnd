@@ -15,7 +15,7 @@ class ChirieService {
   }
 
   async createChirie(chirie) {
-    chirie.id = uuid.v4();
+    chirie.id = uuid();
     return await this.chirieRepository.createChirie(chirie);
   }
 

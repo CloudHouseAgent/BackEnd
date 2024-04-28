@@ -37,10 +37,5 @@
     "freeFrom": "Disponibil imediat",
     "petsAllowed": true
   },
-  "contact": {
-    "name": "John Doe",
-    "phone": "0722 123 456",
-    "email": "john.doe@example.com"
-  },
   "images": []
 }

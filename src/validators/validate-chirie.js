@@ -1,14 +1,14 @@
-function mapAndValidateChirie(body) {
-  const {
-    Adress,
-    PropertyInfo,
-    Facilities,
-    OtherInfo,
-    Contact,
-    Chirie,
-  } = require("../models");
+import {
+  Chirie,
+  Adress,
+  PropertyInfo,
+  Facilities,
+  OtherInfo,
+  Contact,
+} from "../models.js";
 
-  const { adress, propertyInfo, facilities, otherInfo, contact, images } = body;
+function mapAndValidateChirie(user, body) {
+  const { adress, propertyInfo, facilities, otherInfo, images } = body;
 
   const mappedAdress = Adress.isValid(adress)
     ? new Adress(
@@ -60,8 +60,13 @@ function mapAndValidateChirie(body) {
       )
     : null;
 
-  const mappedContact = Contact.isValid(contact)
-    ? new Contact(contact.name, contact.phone, contact.email)
+  const mappedContact = Contact.isValid({
+    userId: user.sub,
+    name: user.fullName,
+    email: user.email,
+    phone: user.phoneNumber,
+  })
+    ? new Contact(user.sub, user.fullName, user.email, user.phone)
     : null;
 
   if (

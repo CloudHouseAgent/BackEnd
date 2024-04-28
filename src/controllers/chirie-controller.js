@@ -26,7 +26,7 @@ class ChirieController {
 
   async createChirie(req, res) {
     try {
-      const chirieReq = validator(req.body);
+      const chirieReq = validator(req.user, req.body);
       if (!chirieReq) {
         return res.status(400).send();
       }

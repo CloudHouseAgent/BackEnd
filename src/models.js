@@ -127,7 +127,8 @@ class OtherInfo {
 }
 
 class Contact {
-  constructor(name, phone, email) {
+  constructor(userId, name, email, phone) {
+    this.userId = userId;
     this.name = name;
     this.phone = phone;
     this.email = email;
@@ -136,8 +137,9 @@ class Contact {
   static isValid(contact) {
     return (
       contact &&
+      typeof contact.userId === "string" &&
       typeof contact.name === "string" &&
-      typeof contact.phone === "string" &&
+      //typeof contact.phone === "string" &&
       typeof contact.email === "string"
     );
   }
