@@ -43,13 +43,17 @@ class ChirieController {
     try {
       const files = req.files;
       const chirieReq = validator(req.user, JSON.parse(req.body.data));
-      if (!chirieReq) {
-        return res.status(400).send();
+
+      if (!chirieReq.isValid) {
+        console.log("Error at validating chirie: " + chirieReq.message);
+        return res.status(400).send(chirieReq.message);
       }
 
+      const chirieData = chirieReq.data;
+
       const images = await uploadImages(files);
-      chirieReq.images = images;
-      const chirie = await this.chirieService.createChirie(chirieReq);
+      chirieData.images = images;
+      const chirie = await this.chirieService.createChirie(chirieData);
       res.send(chirie);
     } catch (error) {
       res.status(500).send({ message: error.message });

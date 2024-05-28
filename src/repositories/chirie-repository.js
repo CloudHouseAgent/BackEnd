@@ -1,4 +1,3 @@
-import { Chirie } from "../models.js";
 import client from "../db.js";
 import "dotenv/config";
 

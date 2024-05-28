@@ -7,6 +7,8 @@ import {
   Contact,
 } from "../models.js";
 
+import ValidatorRepsonse from "./validator_response.js";
+
 function mapAndValidateChirie(user, body) {
   const { adress, propertyInfo, facilities, otherInfo, images } = body;
 
@@ -69,24 +71,30 @@ function mapAndValidateChirie(user, body) {
     ? new Contact(user.sub, user.fullName, user.email, user.phone)
     : null;
 
-  if (
-    !mappedAdress ||
-    !mappedPropertyInfo ||
-    !mappedOtherInfo ||
-    !mappedFacilities ||
-    !mappedContact
-  ) {
-    return null;
+  if (!mappedAdress) {
+    return new ValidatorRepsonse(false, "Adress is invalid", null);
+  } else if (!mappedPropertyInfo) {
+    return new ValidatorRepsonse(false, "Property info is invalid", null);
+  } else if (!mappedFacilities) {
+    return new ValidatorRepsonse(false, "Facilities are invalid", null);
+  } else if (!mappedOtherInfo) {
+    return new ValidatorRepsonse(false, "Other info is invalid", null);
+  } else if (!mappedContact) {
+    return new ValidatorRepsonse(false, "Contact is invalid", null);
   }
 
-  return new Chirie(
-    null,
-    mappedAdress,
-    mappedPropertyInfo,
-    mappedFacilities,
-    mappedOtherInfo,
-    mappedContact,
-    images
+  return new ValidatorRepsonse(
+    true,
+    "succes",
+    new Chirie(
+      null,
+      mappedAdress,
+      mappedPropertyInfo,
+      mappedFacilities,
+      mappedOtherInfo,
+      mappedContact,
+      images
+    )
   );
 }
 
