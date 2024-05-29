@@ -15,7 +15,7 @@ class ChirieService {
     return await this.chirieRepository.getChirieById(id);
   }
 
-  async getChirii(userQuery) {
+  async getChirii(userQuery, totalCount) {
     if (!userQuery) {
       return await this.chirieRepository.getChirii();
     }
@@ -32,7 +32,7 @@ class ChirieService {
     const index = pc.index(indexName);
 
     const searchResults = await index.namespace("chirie").query({
-      topK: 1,
+      topK: totalCount,
       vector: embeddingsVector,
       includeValues: true,
     });

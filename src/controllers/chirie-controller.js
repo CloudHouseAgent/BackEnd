@@ -23,10 +23,10 @@ class ChirieController {
 
   async getChirii(req, res) {
     try {
-      // const queryMessage = req.query.message;
-      const queryMessage = "Vreau o chirie decomandata in zona centrala a orasului";
-      console.log(`Query message: ${queryMessage}`);
-      const chirii = await this.chirieService.getChirii(queryMessage);
+      const queryMessage = req.query.detaliiChirii;
+      const queryNumarChirii = req.query.numarChirii;
+
+      const chirii = await this.chirieService.getChirii(queryMessage, queryNumarChirii);
       res.send(chirii);
     } catch (error) {
       console.log("Error at getting chirii: " + error.message);
