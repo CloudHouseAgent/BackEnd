@@ -2,9 +2,7 @@ import repository from "../repositories/chirie-repository.js";
 import { v4 as uuid } from "uuid";
 import pc from "../pinecone.js";
 import openai from "./openai-service.js";
-
 const indexName = "chirie-index";
-
 
 class ChirieService {
   constructor() {
@@ -45,15 +43,17 @@ class ChirieService {
       chirii.push(chirie);
     }
 
-    console.log(`Chirii length: ${chirii.length} si ids: ${chirii.map(chirie => chirie.id)}`);
+    console.log(
+      `Chirii length: ${chirii.length} si ids: ${chirii.map(
+        (chirie) => chirie.id
+      )}`
+    );
     return chirii;
   }
 
   async getMyChirii(userId) {
     return await this.chirieRepository.getMyChirii(userId);
   }
-
-
 
   async createChirie(chirie) {
     chirie.id = uuid();
@@ -95,8 +95,8 @@ class ChirieService {
       {
         id: chirie.id,
         values: embeddingsVector,
-      }
-    ])
+      },
+    ]);
 
     return newChirie;
   }
@@ -111,6 +111,24 @@ class ChirieService {
 
     const index = pc.index(indexName);
     await index.namespace("chirie").deleteOne(id);
+  }
+
+  async getChirieDescriptionFromParams(chirie) {
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content:
+            "Creaza te rog o descriere a unui anunt despre chirii pentru chiria reprezentata de json-ul: " +
+            JSON.stringify(chirie) +
+            ".",
+        },
+        { role: "user", content: "Descrie chiria" },
+      ],
+      model: "gpt-3.5-turbo",
+    });
+
+    return completion.choices[0];
   }
 }
 
