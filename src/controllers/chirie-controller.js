@@ -24,7 +24,8 @@ class ChirieController {
   async getChirii(req, res) {
     try {
       // const queryMessage = req.query.message;
-      const queryMessage = "Vreau o chirie decomandata in zona centrala a orasului";
+      const queryMessage =
+        "Vreau o chirie decomandata in zona centrala a orasului";
       console.log(`Query message: ${queryMessage}`);
       const chirii = await this.chirieService.getChirii(queryMessage);
       res.send(chirii);
@@ -80,14 +81,38 @@ class ChirieController {
   async deleteChirie(req, res) {
     try {
       const chirie = await this.chirieService.deleteChirie(req.params.id);
-      
+
       res.send(chirie);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
   }
+
+  async getChirieDescriptionFromParams(req, res) {
+    try {
+      const chirieObj = validator(req.user, req.body);
+
+      if (!chirieObj.isValid) {
+        res.status(400).send("Invalid chirie object: " + chirieObj.message);
+        return;
+      }
+
+      delete chirieObj.data.id;
+      delete chirieObj.data.images;
+      delete chirieObj.data.contact;
+
+      //console.log(chirieObj.data);
+
+      const description =
+        await this.chirieService.getChirieDescriptionFromParams(chirieObj.data);
+
+      //console.log(description);
+
+      res.send(description.message.content);
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  }
 }
-
-
 
 export default ChirieController;

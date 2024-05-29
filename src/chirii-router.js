@@ -18,6 +18,10 @@ router.get("/my", verify, (req, res) => {
   controller.getMyChirii(req, res);
 });
 
+router.get("/description", verify, (req, res) => {
+  controller.getChirieDescriptionFromParams(req, res);
+});
+
 router.get("/:id", (req, res) => {
   console.log(req.params.id);
   controller.getChirie(req, res);
