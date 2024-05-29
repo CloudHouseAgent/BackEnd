@@ -24,7 +24,8 @@ class ChirieController {
   async getChirii(req, res) {
     try {
       const queryMessage = req.query.detaliiChirii;
-      const queryNumarChirii = req.query.numarChirii;
+      const queryNumarChirii = +req.query.numarChirii;
+      console.log(`Query message: ${queryMessage} and query numar chirii: ${queryNumarChirii}`)
 
       const chirii = await this.chirieService.getChirii(queryMessage, queryNumarChirii);
       res.send(chirii);
