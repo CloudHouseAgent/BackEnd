@@ -18,6 +18,12 @@ class ChirieRepository {
     return resource;
   }
 
+
+  async createChirie(chirie) {
+    const { resource } = await this.container.items.create(chirie);
+    return resource;
+  }
+
   async getMyChirii(userId) {
     const querySpec = {
       query: "SELECT * FROM c WHERE c.contact.userId = @userId",
@@ -30,10 +36,6 @@ class ChirieRepository {
     return resources;
   }
 
-  async createChirie(chirie) {
-    const { resource } = await this.container.items.create(chirie);
-    return resource;
-  }
 
   async updateChirie(chirie) {
     const { resource } = await this.container.item(chirie.id).replace(chirie);

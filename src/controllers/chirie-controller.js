@@ -23,9 +23,13 @@ class ChirieController {
 
   async getChirii(req, res) {
     try {
-      const chirii = await this.chirieService.getChirii();
+      // const queryMessage = req.query.message;
+      const queryMessage = "Vreau o chirie decomandata in zona centrala a orasului";
+      console.log(`Query message: ${queryMessage}`);
+      const chirii = await this.chirieService.getChirii(queryMessage);
       res.send(chirii);
     } catch (error) {
+      console.log("Error at getting chirii: " + error.message);
       res.status(500).send({ message: error.message });
     }
   }
@@ -56,6 +60,7 @@ class ChirieController {
       const chirie = await this.chirieService.createChirie(chirieData);
       res.send(chirie);
     } catch (error) {
+      console.log("Error at creating chirie: " + error.message);
       res.status(500).send({ message: error.message });
     }
   }
@@ -75,11 +80,14 @@ class ChirieController {
   async deleteChirie(req, res) {
     try {
       const chirie = await this.chirieService.deleteChirie(req.params.id);
+      
       res.send(chirie);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
   }
 }
+
+
 
 export default ChirieController;
