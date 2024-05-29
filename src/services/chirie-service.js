@@ -2,7 +2,10 @@ import repository from "../repositories/chirie-repository.js";
 import { v4 as uuid } from "uuid";
 import pc from "../pinecone.js";
 import openai from "./openai-service.js";
+
 const indexName = "chirie-index";
+const completionsModel = "gpt-4o-2024-05-13";
+const embeddingsModel = "text-embedding-3-small";
 
 class ChirieService {
   constructor() {
@@ -19,7 +22,7 @@ class ChirieService {
     }
 
     const embedding = await openai.embeddings.create({
-      model: "text-embedding-3-small",
+      model: embeddingsModel,
       input: userQuery,
       encoding_format: "float",
     });
@@ -62,8 +65,9 @@ class ChirieService {
 
     const newChirieJson = JSON.stringify(newChirie);
 
+
     const embedding = await openai.embeddings.create({
-      model: "text-embedding-3-small",
+      model: embeddingsModel,
       input: newChirieJson,
       encoding_format: "float",
     });
@@ -119,13 +123,11 @@ class ChirieService {
         {
           role: "system",
           content:
-            "Creaza te rog o descriere a unui anunt despre chirii pentru chiria reprezentata de json-ul: " +
-            JSON.stringify(chirie) +
-            ".",
+          `Creaza te rog o descriere, sub forma a unul sau maxim 3 paragrafe, pentru un anunt despre chiria reprezentata de json-ul: ${JSON.stringify(chirie)}.`,
         },
         { role: "user", content: "Descrie chiria" },
       ],
-      model: "gpt-3.5-turbo",
+      model: completionsModel
     });
 
     return completion.choices[0];
